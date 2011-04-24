@@ -1,0 +1,34 @@
+<html>
+    <head>
+      <link href="/++resource++ploneterminal/jquery.terminal/css/jquery.terminal.css" rel="stylesheet" />
+      <script src="/++resource++ploneterminal/jquery.terminal/js/jquery-1.5.min.js"></script>
+      <script src="/++resource++ploneterminal/jquery.terminal/js/jquery-1.5.min.js"></script>
+      <script src="/++resource++ploneterminal/jquery.terminal/js/jquery.terminal-0.3.3.min.js"></script>
+      <style>
+        body {margin:0; padding:0;background-color:black;}
+        pre#greetings {font-weight:bold; font-size:130%;}
+        .hidden {display:none;}
+        a,
+        h1.title,
+        p.description,
+        p.body {color: #fff}
+        h1 { font-size: 120%; }
+        h2, h3, h4, h5, h6 { font-size: 110%; }
+      </style>
+    </head>
+    <body>
+        <div id="term"></div>
+<a id="portal_url" class="hidden" tal:attributes="href context/portal_url"></a>
+<pre id="greetings" class="hidden">
+ ____                      _            _
+| __ )  ___  __ _ _ __ ___| |_ ___  ___| |__
+|  _ \ / _ \/ _` | '__/ __| __/ _ \/ __| '_ \
+| |_) |  __/ (_| | |  \__ \ ||  __/ (__| | | |
+|____/ \___|\__,_|_|  |___/\__\___|\___|_| |_|
+
+Welcome on the bearstech.com interactive shell.
+Use the help command if you are lost.
+</pre>
+        <script src="/++resource++ploneterminal/ploneterminal.js"></script>
+    </body>
+</html>
