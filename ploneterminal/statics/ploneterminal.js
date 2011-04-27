@@ -2,14 +2,14 @@ var Terminal = {};
 
 (function($){
 $.extend(Terminal, {
-    cwd: '/',
-    options: {
+    _cwd: '/',
+    _options: {
                 height: '90%',
                 greetings:'',
                 prompt_mask: '$cwd$',
                 prompt: '/$'
              },
-    parse_command: function(line, term) {
+    _parse_command: function(line, term) {
         if (!line) return;
         var args = line.split(' ');
         var meth = null;
@@ -23,7 +23,7 @@ $.extend(Terminal, {
         } catch (e) {term.error(['No such command ', cmd, e]);};
     },
     _path: function(args) {
-        var splited = this.cwd.split('/');
+        var splited = this._cwd.split('/');
         if (args.length > 0) {
             args = args[0];
             if (args[0] == '/') {
@@ -47,12 +47,19 @@ $.extend(Terminal, {
         if (path[0]!='/') path = '/'+path;
         return path;
     },
+    help: function(args, term) {
+        term.echo('Valid commands are:');
+        for (k in Terminal) {
+            if (!/^_/.exec(k))
+                term.echo('- '+k);
+        }
+    },
     cd: function(args, term) {
         var self = this;
         path = self._path(args);
         if (path == '/') {
-            self.cwd = path;
-            term.set_prompt(self.options['prompt_mask'].replace('$cwd', self.cwd));
+            self._cwd = path;
+            term.set_prompt(self._options['prompt_mask'].replace('$cwd', self._cwd));
             return;
         }
         $.ajax({
@@ -63,8 +70,8 @@ $.extend(Terminal, {
                 if (!obj.is_folderish) {
                     term.error(path+' is not a directory');
                 } else {
-                    self.cwd = path;
-                    term.set_prompt(self.options['prompt_mask'].replace('$cwd', self.cwd));
+                    self._cwd = path;
+                    term.set_prompt(self._options['prompt_mask'].replace('$cwd', self._cwd));
                 }
             },
             error: function() {
@@ -73,7 +80,7 @@ $.extend(Terminal, {
         });
     },
     pwd: function(args, term) {
-        term.echo(this.cwd);
+        term.echo(this._cwd);
     },
     ls: function(args, term) {
         var self = this;
@@ -153,8 +160,8 @@ $(document).ready(function() {
         dataType: 'json',
         url: $('#portal_url').attr('href')+'/server_info.sh',
         success: function(data) {
-            $.extend(Terminal.options, data);
-            $('#term').terminal(Terminal.parse_command, Terminal.options);
+            $.extend(Terminal._options, data);
+            $('#term').terminal(Terminal._parse_command, Terminal._options);
             $('.terminal-output').append($('#greetings').show());
         }
     });

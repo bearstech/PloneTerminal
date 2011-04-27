@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 from Products.Five import BrowserView
+import logging
 try:
     import json
 except ImportError:
     import simplejson as json
+
+log = logging.getLogger(__name__)
 
 class Shell(BrowserView):
 
@@ -37,10 +40,10 @@ class Shell(BrowserView):
                 splitted_path=path.split('/'),
                 is_folderish=b.is_folderish,
                 modified=b.modified.strftime('%d %m %H:%M'),
-                review_state=b.review_state,
                 size=b.getObjSize,
                 owner=b.Creator,
             )
+        log.warn(results)
         return json.dumps(results)
 
 
@@ -66,7 +69,6 @@ class Shell(BrowserView):
                     splitted_path=path.split('/'),
                     is_folderish=b.is_folderish,
                     modified=b.modified.strftime('%d %m %H:%M'),
-                    review_state=b.review_state,
                     size=b.getObjSize,
                     owner=b.Creator,
                 )

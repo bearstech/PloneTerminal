@@ -1,5 +1,7 @@
 <html>
     <head>
+      <title>Terminal</title>
+      <link rel="icon" type="image/png" href="/++resource++ploneterminal/favicon.ico" />
       <link href="/++resource++ploneterminal/jquery.terminal/css/jquery.terminal.css" rel="stylesheet" />
       <script src="/++resource++ploneterminal/jquery.terminal/js/jquery-1.5.min.js"></script>
       <script src="/++resource++ploneterminal/jquery.terminal/js/jquery-1.5.min.js"></script>
@@ -20,13 +22,14 @@
         <div id="term"></div>
 <a id="portal_url" class="hidden" tal:attributes="href context/portal_url"></a>
 <pre id="greetings" class="hidden">
- ____                      _            _
-| __ )  ___  __ _ _ __ ___| |_ ___  ___| |__
-|  _ \ / _ \/ _` | '__/ __| __/ _ \/ __| '_ \
-| |_) |  __/ (_| | |  \__ \ ||  __/ (__| | | |
-|____/ \___|\__,_|_|  |___/\__\___|\___|_| |_|
+ ____  _                 _____                   _             _ 
+|  _ \| | ___  _ __   __|_   _|__ _ __ _ __ ___ (_)_ __   __ _| |
+| |_) | |/ _ \| '_ \ / _ \| |/ _ \ '__| '_ ` _ \| | '_ \ / _` | |
+|  __/| | (_) | | | |  __/| |  __/ |  | | | | | | | | | | (_| | |
+|_|   |_|\___/|_| |_|\___||_|\___|_|  |_| |_| |_|_|_| |_|\__,_|_|
 
-Welcome on the bearstech.com interactive shell.
+Welcome on the <a href="http://pypi.python.org/pypi/PloneTerminal">PloneTerminal</a> interactive shell.
+This shell is a <a href="http://plone.org">Plone</a> integration of <a href="http://terminal.jcubic.pl/">jquery.terminal</a>.
 Use the help command if you are lost.
 </pre>
         <script src="/++resource++ploneterminal/ploneterminal.js"></script>

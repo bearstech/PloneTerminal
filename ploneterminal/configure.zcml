@@ -11,9 +11,8 @@
       />
 
   <browser:page
-      name="term"
+      name="terminal"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".sh.Shell"
       template="index.pt"
       permission="zope.Public"
       />
