@@ -1,0 +1,3 @@
+[submodule "jquery.terminal"]
+    path = ploneterminal/statics/jquery.terminal
+	url = git://github.com/jcubic/jquery.terminal.git
