@@ -33,8 +33,13 @@ Then add a view for your specific theme in a configure.zcml::
       layer=".interfaces.IThemeSpecific"
       />
 
+Demo
+====
+
+click here_.
 
 
 .. _jquery.terminal: http://terminal.jcubic.pl/
 .. _plone: http://plone.org
 .. _github: https://github.com/bearstech/PloneTerminal/blob/master/ploneterminal/index.pt
+.. _here: http://bearstech.com/term

@@ -10,7 +10,7 @@ setup(name='PloneTerminal',
       # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
           'Framework :: Plone',
-          'Intended Audience :: Developers'
+          'Intended Audience :: Developers',
           'License :: OSI Approved :: GNU General Public License (GPL)',
           ],
       keywords='plone terminal',
