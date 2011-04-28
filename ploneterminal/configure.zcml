@@ -35,7 +35,7 @@
 
   <browser:page
       name="ls.sh"
-      for="Products.ATContentTypes.interface.interfaces.IATContentType"
+      for="Products.Archetypes.interfaces.base.IBaseContent"
       class=".sh.Shell"
       attribute="ls"
       permission="zope.Public"
@@ -43,7 +43,7 @@
 
   <browser:page
       name="info.sh"
-      for="Products.ATContentTypes.interface.interfaces.IATContentType"
+      for="Products.Archetypes.interfaces.base.IBaseContent"
       class=".sh.Shell"
       attribute="info"
       permission="zope.Public"

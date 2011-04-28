@@ -1,0 +1,25 @@
+>>> from Products.Five.testbrowser import Browser
+>>> browser = Browser()
+>>> portal_url = self.portal.absolute_url()
+
+>>> browser.open(portal_url+'/server_info.sh')
+>>> print browser.contents
+{"member": "guest", "host": "nohost", "prompt": "guest@nohost:/$", "prompt_mask": "guest@nohost:$cwd$"}
+
+>>> browser.open(portal_url+'/ls.sh')
+>>> print browser.contents
+{"/Members": {"description": "Site Users", ..."path": "/front-page", "id": "front-page", ...}}
+
+>>> browser.open(portal_url+'/Members/info.sh')
+>>> print browser.contents
+{"description": "Site Users", "title": "Users", "url": "http://nohost/plone/Members", "is_folderish": true, ...
+ "owner": "portal_owner", "path": "/Members", "id": "Members", "size": "1 kB"}
+
+>>> browser.open(portal_url+'/front-page/info.sh')
+>>> print browser.contents
+{"description": "Congratulations! You have successfully installed Plone.", "title": "Welcome to Plone",
+"url": "http://nohost/plone/front-page", "is_folderish": false, ...}
+
+
+
+

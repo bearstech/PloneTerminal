@@ -25,7 +25,7 @@ class Shell(BrowserView):
         path = '/'.join(self.context.getPhysicalPath())
         brains = self.context.portal_catalog.searchResults(
                         path=dict(query=path, depth=1),
-                        object_provides=['Products.ATContentTypes.interface.interfaces.IATContentType'],
+                        object_provides=['Products.Archetypes.interfaces.base.IBaseContent'],
                     )
         results = {}
         for b in brains:
@@ -53,7 +53,7 @@ class Shell(BrowserView):
         path = '/'.join(self.context.getPhysicalPath())
         brains = self.context.portal_catalog.searchResults(
                         path=dict(query=path, depth=0),
-                        object_provides=['Products.ATContentTypes.interface.interfaces.IATContentType'],
+                        object_provides=['Products.Archetypes.interfaces.base.IBaseContent'],
                     )
         data = dict()
         for b in brains:
