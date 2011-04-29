@@ -1,5 +1,7 @@
 `jquery.terminal`_ integration for `Plone`_
 
+.. image:: https://github.com/bearstech/PloneTerminal/raw/master/docs/plone_terminal.png
+
 Buildout configuration
 =======================
 
