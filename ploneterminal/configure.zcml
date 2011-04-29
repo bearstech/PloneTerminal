@@ -26,6 +26,14 @@
       />
 
   <browser:page
+      name="simple_cmd.sh"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      class=".sh.Shell"
+      attribute="simple_cmd"
+      permission="zope.Public"
+      />
+
+  <browser:page
       name="ls.sh"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".sh.Shell"
@@ -38,6 +46,22 @@
       for="Products.Archetypes.interfaces.base.IBaseContent"
       class=".sh.Shell"
       attribute="ls"
+      permission="zope.Public"
+      />
+
+  <browser:page
+      name="grep.sh"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      class=".sh.Shell"
+      attribute="grep"
+      permission="zope.Public"
+      />
+
+  <browser:page
+      name="grep.sh"
+      for="Products.Archetypes.interfaces.base.IBaseContent"
+      class=".sh.Shell"
+      attribute="grep"
       permission="zope.Public"
       />
 

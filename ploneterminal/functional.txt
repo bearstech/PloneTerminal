@@ -4,7 +4,8 @@
 
 >>> browser.open(portal_url+'/server_info.sh')
 >>> print browser.contents
-{"member": "guest", "host": "nohost", "prompt": "guest@nohost:/$", "prompt_mask": "guest@nohost:$cwd$"}
+{"member": "guest", "create_vocabulary": ["Document", "Event", "File", "Folder", "Image", "Link", "News Item", "Topic"],
+"host": "nohost", "prompt": "guest@nohost:/$", "prompt_mask": "guest@nohost:$cwd$"}
 
 >>> browser.open(portal_url+'/ls.sh')
 >>> print browser.contents
