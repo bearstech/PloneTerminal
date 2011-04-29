@@ -1,0 +1,3 @@
+recursive-include ploneterminal *.css
+recursive-include ploneterminal *.js
+recursive-include ploneterminal *.pt
