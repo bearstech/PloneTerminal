@@ -1,3 +1,5 @@
 recursive-include ploneterminal *.css
 recursive-include ploneterminal *.js
 recursive-include ploneterminal *.pt
+recursive-include ploneterminal *.zcml
+recursive-include ploneterminal *.txt
