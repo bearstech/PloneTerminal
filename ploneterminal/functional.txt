@@ -4,23 +4,22 @@
 
 >>> browser.open(portal_url+'/server_info.sh')
 >>> print browser.contents
-{"member": "guest", "create_vocabulary": ["Document", "Event", "File", "Folder", "Image", "Link", "News Item", "Topic"],
-"host": "nohost", "prompt": "guest@nohost:/$", "prompt_mask": "guest@nohost:$cwd$"}
+{"host": "nohost", "prompt": "guest@nohost:/$",
+"create_vocabulary": ["News Item", "Image", "Collection", "Page", "Topic", "Link", "File", "Folder", "Document", "Event"],
+"prompt_mask": "guest@nohost:$cwd$", "user": "guest"}
 
 >>> browser.open(portal_url+'/ls.sh')
 >>> print browser.contents
-{"/Members": {"description": "Site Users", ..."path": "/front-page", "id": "front-page", ...}}
+{"/Members": {"title_or_id": "Users", "obj_type": "Folder", ..."path": "/front-page", ...}}
 
 >>> browser.open(portal_url+'/Members/info.sh')
 >>> print browser.contents
-{"description": "Site Users", "title": "Users", "url": "http://nohost/plone/Members", "is_folderish": true, ...
- "owner": "portal_owner", "path": "/Members", "id": "Members", "size": "1 kB"}
+{"title_or_id": "Users", "obj_type": "Folder"...}
 
 >>> browser.open(portal_url+'/front-page/info.sh')
 >>> print browser.contents
-{"description": "Congratulations! You have successfully installed Plone.", "title": "Welcome to Plone",
-"url": "http://nohost/plone/front-page", "is_folderish": false, ...}
+{"title_or_id": "Welcome to Plone", "obj_type": "Page", "description": "Congratulations! ...}
 
-
-
-
+>>> browser.open(portal_url+'/grep.sh?s=welcome')
+>>> print browser.contents
+{"/front-page": ...}

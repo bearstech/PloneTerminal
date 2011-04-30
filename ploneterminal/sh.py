@@ -36,6 +36,14 @@ class Shell(BrowserView):
         self.portal_url = self.portal.absolute_url()
         self.path = '/'.join(self.context.getPhysicalPath())
 
+    def get_ctypes(self, context=None):
+        if context is None:
+            context = self.context
+        vocab = ReallyUserFriendlyTypesVocabularyFactory(context)
+        ctypes = [o.value for o in vocab]
+        ctypes.extend([o.title for o in vocab])
+        return list(set(ctypes))
+
     def brain_dict(self, b):
         url=b.getURL()
         path = url[len(self.portal_url):]
@@ -67,11 +75,9 @@ class Shell(BrowserView):
         mtool = self.context.portal_membership
         if mtool.isAnonymousUser():
             member = 'guest'
-            ctypes = []
         else:
             member = str(mtool.getAuthenticatedMember())
-        ctypes = ReallyUserFriendlyTypesVocabularyFactory(self.context)
-        ctypes = [o.value for o in ctypes]
+        ctypes = self.get_ctypes()
         data = dict(
             user=member,
             host=host,
@@ -108,9 +114,7 @@ class Shell(BrowserView):
         else:
             data['text_body'] = ''
 
-        ctypes = ReallyUserFriendlyTypesVocabularyFactory(self.context)
-        ctypes = [o.value for o in ctypes]
-        data['ctypes'] = ctypes
+        data['ctypes'] = self.get_ctypes()
 
         log.warn(data)
         return json.dumps(data)
@@ -119,8 +123,7 @@ class Shell(BrowserView):
     def ls(self):
         self.request.response.setHeader('Content-Type', 'application/json')
 
-        ctypes = ReallyUserFriendlyTypesVocabularyFactory(self.context)
-        ctypes = [o.value for o in ctypes]
+        ctypes = self.get_ctypes()
 
         brains = self.context.portal_catalog.searchResults(
                         path=dict(query=self.path, depth=1),
@@ -141,8 +144,7 @@ class Shell(BrowserView):
         portal_url = self.context.portal_url.getPortalObject().absolute_url()
         results = {}
         if 's' in self.request.form:
-            ctypes = ReallyUserFriendlyTypesVocabularyFactory(self.portal)
-            ctypes = [o.value for o in ctypes]
+            ctypes = self.get_ctypes(self.portal)
             brains = self.context.portal_catalog.searchResults(
                         SearchableText=self.request.form.get('s'),
                         path=dict(query=self.path, depth=10),

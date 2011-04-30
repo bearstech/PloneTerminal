@@ -286,7 +286,7 @@ $.extend(Terminal, {
         add_folder(path.join('/'), id);
 
     },
-    rm: function(args, term) {
+    _rm: function(args, term) {
         self = this;
         if (args.length == 1) {
             path = args.pop();
