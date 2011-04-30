@@ -116,7 +116,7 @@ class Shell(BrowserView):
 
         data['ctypes'] = self.get_ctypes()
 
-        log.warn(data)
+        #log.warn(data)
         return json.dumps(data)
 
 
@@ -136,7 +136,7 @@ class Shell(BrowserView):
             data = self.brain_dict(b)
             path = data['path']
             results[path] = data
-        log.warn(results)
+        #log.warn(results)
         return json.dumps(results)
 
     def grep(self):
@@ -155,6 +155,6 @@ class Shell(BrowserView):
                 data = self.brain_dict(b)
                 path = data['path']
                 results[path] = data
-            log.warn(results)
+            #log.warn(results)
         return json.dumps(results)
 
