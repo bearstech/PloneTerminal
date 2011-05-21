@@ -5,7 +5,7 @@
       <link href="/++resource++ploneterminal/jquery.terminal/css/jquery.terminal.css" rel="stylesheet" />
       <script src="/++resource++ploneterminal/jquery.terminal/js/jquery-1.5.min.js"></script>
       <script src="/++resource++ploneterminal/jquery.terminal/js/jquery-1.5.min.js"></script>
-      <script src="/++resource++ploneterminal/jquery.terminal/js/jquery.terminal-0.3.3.min.js"></script>
+      <script src="/++resource++ploneterminal/jquery.terminal/js/jquery.terminal-0.3.4.min.js"></script>
       <style>
         body {margin:0; padding:0;background-color:black;}
         pre#greetings {font-weight:bold; font-size:130%;}

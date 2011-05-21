@@ -3,6 +3,7 @@ from plone.app.vocabularies.types import ReallyUserFriendlyTypesVocabularyFactor
 from plone.app.content.browser.foldercontents import FolderContentsTable
 from zope.component import getMultiAdapter
 from Products.Five import BrowserView
+from fnmatch import fnmatch
 import subprocess
 import logging
 import os
@@ -35,6 +36,7 @@ class Shell(BrowserView):
         self.portal = self.context.portal_url.getPortalObject()
         self.portal_url = self.portal.absolute_url()
         self.path = '/'.join(self.context.getPhysicalPath())
+        self.request.response.setHeader('Content-Type', 'application/json')
 
     def get_ctypes(self, context=None):
         if context is None:
@@ -66,7 +68,6 @@ class Shell(BrowserView):
         return data
 
     def server_info(self):
-        self.request.response.setHeader('Content-Type', 'application/json')
         for k in ('HTTP_HOST', 'SERVER_NAME',):
             host = self.request.environ.get(k)
             if host:
@@ -88,7 +89,6 @@ class Shell(BrowserView):
         return json.dumps(data)
 
     def simple_cmd(self):
-        self.request.response.setHeader('Content-Type', 'application/json')
         cmd = self.request.form.get('cmd', '')
         if cmd in COMMANDS:
             data = subprocess.Popen([COMMANDS[cmd]], stdout=subprocess.PIPE).stdout.read().strip()
@@ -100,7 +100,6 @@ class Shell(BrowserView):
 
 
     def info(self):
-        self.request.response.setHeader('Content-Type', 'application/json')
         portal_url = self.context.portal_url.getPortalObject().absolute_url()
         brains = self.context.portal_catalog.searchResults(path=self.path)
         for b in brains:
@@ -121,8 +120,6 @@ class Shell(BrowserView):
 
 
     def ls(self):
-        self.request.response.setHeader('Content-Type', 'application/json')
-
         ctypes = self.get_ctypes()
 
         brains = self.context.portal_catalog.searchResults(
@@ -140,7 +137,6 @@ class Shell(BrowserView):
         return json.dumps(results)
 
     def grep(self):
-        self.request.response.setHeader('Content-Type', 'application/json')
         portal_url = self.context.portal_url.getPortalObject().absolute_url()
         results = {}
         if 's' in self.request.form:
@@ -148,13 +144,32 @@ class Shell(BrowserView):
             brains = self.context.portal_catalog.searchResults(
                         SearchableText=self.request.form.get('s'),
                         path=dict(query=self.path, depth=10),
-                        Type=ctypes, limit=100)
+                        Type=ctypes, limit=1000)
             for b in brains:
                 if b.getPath() == self.path:
                     continue
                 data = self.brain_dict(b)
                 path = data['path']
                 results[path] = data
+            #log.warn(results)
+        return json.dumps(results)
+
+    def find(self):
+        portal_url = self.context.portal_url.getPortalObject().absolute_url()
+        results = {}
+        if 's' in self.request.form:
+            s = self.request.form['s'].lower()
+            ctypes = self.get_ctypes(self.portal)
+            brains = self.context.portal_catalog.searchResults(
+                        path=dict(query=self.path, depth=10),
+                        Type=ctypes, limit=1000)
+            for b in brains:
+                if fnmatch(b.getId.lower(), s):
+                    if b.getPath() == self.path:
+                        continue
+                    data = self.brain_dict(b)
+                    path = data['path']
+                    results[path] = data
             #log.warn(results)
         return json.dumps(results)
 

@@ -204,11 +204,11 @@ $.extend(Terminal, {
             var path = self._path([args.pop()]);
             var s = args.pop();
         } else {
-            term.echo('Usage: grep <term> <path>')
+            term.echo('Usage: grep <term> <path>');
             return true;
         }
         if (!s) {
-            term.echo('Usage: grep <term> <path>')
+            term.echo('Usage: grep <term> <path>');
             return true;
         }
         $.ajax({
@@ -217,6 +217,46 @@ $.extend(Terminal, {
             data: {'s': s},
             async: false,
             url: $('#portal_url').attr('href')+path+'/@@grep.sh',
+            success: function(data) {
+                for (k in data) {
+                    var obj = data[k];
+                    if (obj.folderish)
+                        term.echo(obj.path+'[[b;#fff;transparent]/]');
+                    else
+                        term.echo(obj.path);
+                }
+            },
+            error: self._no_such_directory
+        });
+    },
+    find: function(args, term) {
+        var self = this;
+        if (args.length == 2) {
+            var s = args.pop();
+            var path = self._path([args.pop()]);
+        } else if (args.length = 1) {
+            var s = args.pop();
+            var path = self._cwd;
+        } else {
+            term.echo('Usage: find [path] <pattern>');
+            term.echo('Patterns are Unix shell style:');
+            term.echo('*       matches everything');
+            term.echo('?       matches any single character');
+            return true;
+        }
+        if (!s) {
+            term.echo('Usage: find [path] <pattern>');
+            term.echo('Patterns are Unix shell style:');
+            term.echo('*       matches everything');
+            term.echo('?       matches any single character');
+            return true;
+        }
+        $.ajax({
+            type:'POST',
+            dataType:'json',
+            data: {'s': s},
+            async: false,
+            url: $('#portal_url').attr('href')+path+'/@@find.sh',
             success: function(data) {
                 for (k in data) {
                     var obj = data[k];

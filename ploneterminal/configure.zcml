@@ -66,6 +66,22 @@
       />
 
   <browser:page
+      name="find.sh"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      class=".sh.Shell"
+      attribute="find"
+      permission="zope.Public"
+      />
+
+  <browser:page
+      name="find.sh"
+      for="Products.Archetypes.interfaces.base.IBaseContent"
+      class=".sh.Shell"
+      attribute="find"
+      permission="zope.Public"
+      />
+
+  <browser:page
       name="info.sh"
       for="Products.Archetypes.interfaces.base.IBaseContent"
       class=".sh.Shell"
